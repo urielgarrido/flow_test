@@ -9,6 +9,10 @@ class CharacterRepository(
 ) {
 
     suspend fun getCharacters(): Response<CharacterRest> {
-        return api.getCharacters()
+        return api.getCharacters(1)
+    }
+
+    fun getCharactersPage() {
+        return
     }
 }
