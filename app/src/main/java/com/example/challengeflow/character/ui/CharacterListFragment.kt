@@ -67,15 +67,6 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
             adapter = characterPagingAdapter
             layoutManager = GridLayoutManager(context, 2)
         }
-        //Se muestra el detalle al lado, si es tablet
-        if (binding.characterDetailNavContainer != null) {
-            val bundle = bundleOf(
-                CharacterDetailFragment.ARG_CHARACTER to characterPagingAdapter?.peek(0)
-            )
-
-            binding.characterDetailNavContainer!!.findNavController()
-                .navigate(R.id.fragment_character_detail, bundle)
-        }
 
     }
 

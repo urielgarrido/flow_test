@@ -41,16 +41,18 @@ class CharacterDetailFragment : Fragment() {
     }
 
     private fun updateContent() {
-        Glide.with(this)
-            .load(characterDetail.image)
-            .placeholder(R.drawable.ic_baseline_image_not_supported)
-            .into(binding.characterDetailImage)
+        if (::characterDetail.isInitialized) {
+            Glide.with(this)
+                .load(characterDetail.image)
+                .placeholder(R.drawable.ic_baseline_image_not_supported)
+                .into(binding.characterDetailImage)
 
-        binding.apply {
-            characterName.text = getString(R.string.name, characterDetail.name)
-            characterStatus.text = getString(R.string.status, characterDetail.status)
-            characterSpecies.text = getString(R.string.species, characterDetail.species)
-            characterGender.text = getString(R.string.gender, characterDetail.gender)
+            binding.apply {
+                characterName.text = getString(R.string.name, characterDetail.name)
+                characterStatus.text = getString(R.string.status, characterDetail.status)
+                characterSpecies.text = getString(R.string.species, characterDetail.species)
+                characterGender.text = getString(R.string.gender, characterDetail.gender)
+            }
         }
     }
 

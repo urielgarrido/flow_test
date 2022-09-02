@@ -8,7 +8,8 @@
     <ImageView
         android:id="@+id/character_detail_image"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_marginTop="@dimen/container_margin"
+        android:layout_height="400dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_baseline_image_not_supported"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,36 +30,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/name"
+            android:text="@string/name_empty"
             android:textColor="@color/black"
-            android:textSize="32sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/character_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/status"
+            android:text="@string/status_empty"
             android:textColor="@color/black"
-            android:textSize="32sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/character_species"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/species"
+            android:text="@string/species_empty"
             android:textColor="@color/black"
-            android:textSize="32sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/character_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/gender"
+            android:text="@string/gender_empty"
             android:textColor="@color/black"
-            android:textSize="32sp" />
+            android:textSize="24sp" />
 
     </LinearLayout>
 

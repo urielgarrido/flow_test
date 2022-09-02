@@ -6,4 +6,8 @@
     <string name="status">Estado: %1$s</string>
     <string name="species">Especie: %1$s</string>
     <string name="gender">Género: %1$s</string>
+    <string name="name_empty">Nombre: -</string>
+    <string name="status_empty">Estado: -</string>
+    <string name="species_empty">Especie: -</string>
+    <string name="gender_empty">Género: -</string>
 </resources>
