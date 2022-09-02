@@ -16,11 +16,8 @@
     </fragment>
     <fragment
         android:id="@+id/item_detail_fragment"
-        android:name="com.example.challengeflow.ItemDetailFragment"
+        android:name="com.example.challengeflow.detail.ui.CharacterDetailFragment"
         android:label="Character Detail"
-        tools:layout="@layout/fragment_item_detail">
-        <argument
-            android:name="item_id"
-            app:argType="integer" />
+        tools:layout="@layout/fragment_character_detail">
     </fragment>
 </navigation>

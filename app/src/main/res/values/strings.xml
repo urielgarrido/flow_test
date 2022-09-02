@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">ChallengeFlow</string>
-    <string name="title_item_detail">Item Detail</string>
+    <string name="title_character_detail">Character Detail</string>
     <string name="character_image">Character image</string>
+    <string name="name">Nombre: %1$s</string>
+    <string name="status">Estado: %1$s</string>
+    <string name="species">Especie: %1$s</string>
+    <string name="gender">Género: %1$s</string>
 </resources>

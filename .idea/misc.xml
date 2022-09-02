@@ -5,12 +5,16 @@
       <map>
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.151" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/drawable/ic_launcher_background.xml" value="0.151" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout-sw600dp/fragment_character_detail.xml" value="0.190625" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout-sw600dp/fragment_character_list.xml" value="0.190625" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout-sw600dp/fragment_item_detail.xml" value="0.190625" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout-sw600dp/fragment_item_list.xml" value="0.190625" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout/activity_character.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout/activity_item_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout/fragment_character_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout/fragment_character_list.xml" value="0.253125" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout/fragment_item_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout/fragment_item_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout/item_character.xml" value="0.2076923076923077" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/ChallengeFlow/app/src/main/res/layout/item_list_content.xml" value="0.25416666666666665" />
       </map>

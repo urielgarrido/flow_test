@@ -3,16 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_details"
-    app:startDestination="@id/fragment_item_detail">
+    app:startDestination="@id/fragment_character_detail">
     <fragment
-        android:id="@+id/fragment_item_detail"
-        android:name="com.example.challengeflow.ItemDetailFragment"
-        android:label="@string/title_item_detail"
-        tools:layout="@layout/fragment_item_detail">
-        <argument
-            android:name="item_id"
-            android:defaultValue=""
-            app:argType="string" />
+        android:id="@+id/fragment_character_detail"
+        android:name="com.example.challengeflow.detail.ui.CharacterDetailFragment"
+        android:label="@string/title_character_detail"
+        tools:layout="@layout/fragment_character_detail">
     </fragment>
 
 </navigation>

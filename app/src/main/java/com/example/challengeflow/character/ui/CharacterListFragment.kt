@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.challengeflow.R
 import com.example.challengeflow.character.di.RetrofitModule
 import com.example.challengeflow.character.model.Character
 import com.example.challengeflow.character.repository.CharacterDataSource
@@ -18,6 +20,7 @@ import com.example.challengeflow.character.ui.adapter.ItemCharacterClickListener
 import com.example.challengeflow.character.ui.viewmodel.CharacterListViewModel
 import com.example.challengeflow.character.ui.viewmodel.CharacterViewModelFactory
 import com.example.challengeflow.databinding.FragmentCharacterListBinding
+import com.example.challengeflow.detail.ui.CharacterDetailFragment
 import kotlinx.coroutines.launch
 
 class CharacterListFragment : Fragment(), ItemCharacterClickListener {
@@ -33,6 +36,11 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
         CharacterViewModelFactory(
             CharacterDataSource(api)
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        characterPagingAdapter = CharacterPagingAdapter(this)
     }
 
     override fun onCreateView(
@@ -51,11 +59,20 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
     }
 
     private fun initViews() {
-        characterPagingAdapter = CharacterPagingAdapter(this)
         binding.charactersRecyclerView.apply {
             adapter = characterPagingAdapter
             layoutManager = GridLayoutManager(context, 2)
         }
+        //Se muestra el detalle al lado, si es tablet
+        if (binding.characterDetailNavContainer != null) {
+            val bundle = bundleOf(
+                CharacterDetailFragment.ARG_CHARACTER to characterPagingAdapter?.peek(0)
+            )
+
+            binding.characterDetailNavContainer!!.findNavController()
+                .navigate(R.id.fragment_character_detail, bundle)
+        }
+
     }
 
     private fun setObservables() {
@@ -90,10 +107,18 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
     }
 
     override fun characterClick(character: Character) {
+        val bundle = bundleOf(
+            CharacterDetailFragment.ARG_CHARACTER to character
+        )
         //Se muestra el detalle al lado, si es tablet
-        //Se muestra el detalle en otro fragment
+        if (binding.characterDetailNavContainer != null) {
+            binding.characterDetailNavContainer!!.findNavController()
+                .navigate(R.id.fragment_character_detail, bundle)
+        } else {
+            //Se muestra el detalle en otro fragment
+            requireView().findNavController().navigate(R.id.show_item_detail, bundle)
+        }
 
-        Toast.makeText(context, character.name, Toast.LENGTH_SHORT).show()
     }
 
 }
