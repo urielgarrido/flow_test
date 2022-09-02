@@ -30,32 +30,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/name"
-            android:textColor="@color/black" />
+            android:text="@string/name" />
 
         <TextView
             android:id="@+id/character_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/status"
-            android:textColor="@color/black" />
+            android:text="@string/status" />
 
         <TextView
             android:id="@+id/character_species"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/species"
-            android:textColor="@color/black" />
+            android:text="@string/species" />
 
         <TextView
             android:id="@+id/character_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/gender"
-            android:textColor="@color/black" />
+            android:text="@string/gender" />
 
     </LinearLayout>
 

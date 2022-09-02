@@ -21,7 +21,6 @@
         android:layout_gravity="bottom|center_horizontal"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:textColor="@color/black"
         android:textSize="18sp"
         tools:text="Ants in my Eyes Johnson" />
 
