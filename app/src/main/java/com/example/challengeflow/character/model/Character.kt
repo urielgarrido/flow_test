@@ -1,5 +1,9 @@
 package com.example.challengeflow.character.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Character(
     val id: Int,
     val name: String,
@@ -7,4 +11,4 @@ data class Character(
     val species: String,
     val gender: String,
     val image: String,
-)
+): Parcelable

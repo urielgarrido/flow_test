@@ -14,7 +14,7 @@ class CharacterPagingAdapter(
     private val clickListener: ItemCharacterClickListener
 ): PagingDataAdapter<Character, CharacterPagingAdapter.ViewHolder>(CharacterDiffCallback()) {
 
-    inner class ViewHolder(private val binding: ItemCharacterBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: ItemCharacterBinding): RecyclerView.ViewHolder(binding.root) {
         val characterImage = binding.characterItemImageView
         val characterName = binding.characterItemName
     }
@@ -51,4 +51,8 @@ class CharacterDiffCallback : DiffUtil.ItemCallback<Character>() {
         return oldItem == newItem
     }
 
+}
+
+interface ItemCharacterClickListener {
+    fun characterClick(character: Character)
 }
