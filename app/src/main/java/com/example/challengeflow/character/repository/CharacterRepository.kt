@@ -12,7 +12,4 @@ class CharacterRepository(
         return api.getCharacters(1)
     }
 
-    fun getCharactersPage() {
-        return
-    }
 }

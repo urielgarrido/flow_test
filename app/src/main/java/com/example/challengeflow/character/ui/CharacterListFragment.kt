@@ -8,27 +8,31 @@ import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.challengeflow.character.di.RetrofitModule
 import com.example.challengeflow.character.model.Character
-import com.example.challengeflow.character.repository.CharacterRepository
-import com.example.challengeflow.character.ui.adapter.CharacterAdapter
+import com.example.challengeflow.character.repository.CharacterDataSource
+import com.example.challengeflow.character.ui.adapter.CharacterPagingAdapter
 import com.example.challengeflow.character.ui.adapter.ItemCharacterClickListener
 import com.example.challengeflow.character.ui.viewmodel.CharacterListViewModel
 import com.example.challengeflow.character.ui.viewmodel.CharacterViewModelFactory
-import com.example.challengeflow.character.usecase.GetCharactersUseCase
 import com.example.challengeflow.databinding.FragmentCharacterListBinding
+import kotlinx.coroutines.launch
 
 class CharacterListFragment : Fragment(), ItemCharacterClickListener {
 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
 
+    private var characterPagingAdapter: CharacterPagingAdapter? = null
+
     private val viewModel: CharacterListViewModel by viewModels {
         val retrofit = RetrofitModule.provideRetrofit()
         val api = RetrofitModule.provideRickAndMortyApi(retrofit)
-        CharacterViewModelFactory(GetCharactersUseCase(CharacterRepository(api)))
+        CharacterViewModelFactory(
+            CharacterDataSource(api)
+        )
     }
 
     override fun onCreateView(
@@ -37,20 +41,29 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
-
-        getCharacters()
-        setObservables()
-
         return binding.root
     }
 
-    private fun getCharacters() {
-        viewModel.getCharacters()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        setObservables()
+    }
+
+    private fun initViews() {
+        characterPagingAdapter = CharacterPagingAdapter(this)
+        binding.charactersRecyclerView.apply {
+            adapter = characterPagingAdapter
+            layoutManager = GridLayoutManager(context, 2)
+        }
     }
 
     private fun setObservables() {
-        viewModel.characters.observe(viewLifecycleOwner) { characters ->
-            setupRecyclerView(binding.charactersRecyclerView, characters)
+        viewModel.getCharactersPaging().observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                characterPagingAdapter?.submitData(it)
+            }
+            viewModel.changeLoading(false)
         }
 
         viewModel.loadingData.observe(viewLifecycleOwner) { isLoading ->
@@ -70,19 +83,10 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
         loadingProgressBar?.hide()
     }
 
-    private fun setupRecyclerView(charactersRecyclerView: RecyclerView, characters: List<Character>) {
-        charactersRecyclerView.apply {
-            adapter = CharacterAdapter(characters, this@CharacterListFragment)
-            layoutManager = GridLayoutManager(context, 2)
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        viewModel.characters.removeObservers(viewLifecycleOwner)
         viewModel.loadingData.removeObservers(viewLifecycleOwner)
-        viewModel.error.removeObservers(viewLifecycleOwner)
     }
 
     override fun characterClick(character: Character) {

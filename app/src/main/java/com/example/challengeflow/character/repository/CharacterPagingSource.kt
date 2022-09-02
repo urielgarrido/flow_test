@@ -9,11 +9,11 @@ import retrofit2.HttpException
 import java.io.IOException
 
 private const val STARTING_PAGE_INDEX = 1
-private const val NETWORK_PAGE_SIZE = 42
 
 class CharacterPagingSource(
     private val rickAndMortyApi: RickAndMortyApi
 ) : PagingSource<Int, Character>() {
+
     override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
@@ -32,12 +32,12 @@ class CharacterPagingSource(
                 if (characters?.isEmpty() == true) {
                     null
                 } else {
-                    pageIndex + (params.loadSize / NETWORK_PAGE_SIZE)
+                    pageIndex + 1
                 }
             LoadResult.Page(
                 data = characters ?: emptyList(),
                 prevKey = if (pageIndex == STARTING_PAGE_INDEX) null else pageIndex,
-                nextKey = nextKey
+                nextKey = if (pageIndex == response.body()?.info?.pages!!) null else nextKey
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)
@@ -46,6 +46,4 @@ class CharacterPagingSource(
         }
 
     }
-
-
 }
