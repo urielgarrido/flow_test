@@ -10,9 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.challengeflow.R
-import com.example.challengeflow.character.di.RetrofitModule
 import com.example.challengeflow.character.model.Character
 import com.example.challengeflow.character.repository.CharacterDataSource
 import com.example.challengeflow.character.ui.adapter.CharacterPagingAdapter
@@ -21,6 +22,7 @@ import com.example.challengeflow.character.ui.viewmodel.CharacterListViewModel
 import com.example.challengeflow.character.ui.viewmodel.CharacterViewModelFactory
 import com.example.challengeflow.databinding.FragmentCharacterListBinding
 import com.example.challengeflow.detail.ui.CharacterDetailFragment
+import com.example.challengeflow.retrofit.RetrofitModule
 import kotlinx.coroutines.launch
 
 class CharacterListFragment : Fragment(), ItemCharacterClickListener {
@@ -29,6 +31,8 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
     private val binding get() = _binding!!
 
     private var characterPagingAdapter: CharacterPagingAdapter? = null
+
+    private var charactersPagingData: PagingData<Character>? = null
 
     private val viewModel: CharacterListViewModel by viewModels {
         val retrofit = RetrofitModule.provideRetrofit()
@@ -78,7 +82,10 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
     private fun setObservables() {
         viewModel.getCharactersPaging().observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch {
-                characterPagingAdapter?.submitData(it)
+                if (charactersPagingData == null) {
+                    charactersPagingData = it
+                }
+                characterPagingAdapter?.submitData(charactersPagingData!!)
             }
             viewModel.changeLoading(false)
         }
@@ -116,7 +123,7 @@ class CharacterListFragment : Fragment(), ItemCharacterClickListener {
                 .navigate(R.id.fragment_character_detail, bundle)
         } else {
             //Se muestra el detalle en otro fragment
-            requireView().findNavController().navigate(R.id.show_item_detail, bundle)
+            findNavController().navigate(R.id.show_item_detail, bundle)
         }
 
     }

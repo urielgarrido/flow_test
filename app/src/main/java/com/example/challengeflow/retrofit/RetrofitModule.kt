@@ -1,6 +1,5 @@
-package com.example.challengeflow.character.di
+package com.example.challengeflow.retrofit
 
-import com.example.challengeflow.retrofit.RickAndMortyApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
